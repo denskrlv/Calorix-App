@@ -13,7 +13,19 @@ struct FoodCell: View {
     @ObservedObject var passedFoodItem: Item
     
     var body: some View {
-        Text(passedFoodItem.name ?? "")
+        HStack {
+            VStack {
+                Text(passedFoodItem.name ?? "")
+                    .font(.system(size: 18, weight: .bold))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Text("\(passedFoodItem.weight ?? "") gram")
+                    .font(.system(size: 14))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            Spacer()
+            Text("\(passedFoodItem.calories ?? "0") KCAL")
+                .font(.system(size: 14, weight: .semibold))
+        }
     }
 }
 

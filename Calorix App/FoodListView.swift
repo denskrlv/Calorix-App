@@ -12,8 +12,6 @@ struct FoodListView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var foodHolder: FoodHolder
 
-    @State var foodDetailsPresented: Bool = false
-
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
@@ -34,14 +32,15 @@ struct FoodListView: View {
                         .onDelete(perform: deleteItems)
                     }
                     .navigationTitle("Food")
-                    FloatingButton()
+                    HStack {
+                        CameraButton()
+                        Spacer()
+                        FloatingButton()
+                    }
+                    .frame(maxWidth: .infinity, alignment: .bottom)
                 }
             }
         }
-    }
-
-    private func addItem() {
-        foodDetailsPresented.toggle()
     }
 
     private func deleteItems(offsets: IndexSet) {

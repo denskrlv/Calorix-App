@@ -7,21 +7,17 @@
 
 import SwiftUI
 
-struct FloatingButton: View
-{
-    @EnvironmentObject var foodHolder: FoodHolder
+struct FloatingButton: View {
     
-    var body: some View
-    {
-        VStack
-        {
+    @EnvironmentObject var foodHolder: FoodHolder
+    @State var foodDetailsPresented: Bool = false
+    
+    var body: some View {
+        VStack {
             Spacer()
-            HStack
-            {
-                Spacer()
+            HStack {
                 NavigationLink(destination: FoodDetailsView(passedFoodItem: nil)
-                    .environmentObject(foodHolder))
-                {
+                    .environmentObject(foodHolder)) {
                     Image(systemName: "plus")
                 }
                 .padding(15)

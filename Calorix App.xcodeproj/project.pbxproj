@@ -17,6 +17,8 @@
 		9C09E10B2975A89B00216DD8 /* FoodDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C09E10A2975A89B00216DD8 /* FoodDetailsView.swift */; };
 		9C09E10D2975ABD900216DD8 /* FloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C09E10C2975ABD900216DD8 /* FloatingButton.swift */; };
 		9C09E10F2975AE8B00216DD8 /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C09E10E2975AE8B00216DD8 /* FoodCell.swift */; };
+		9C09E1112975B77F00216DD8 /* CameraButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C09E1102975B77F00216DD8 /* CameraButton.swift */; };
+		9C09E1132975BA7900216DD8 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C09E1122975BA7900216DD8 /* ImagePickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,9 @@
 		9C09E10A2975A89B00216DD8 /* FoodDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailsView.swift; sourceTree = "<group>"; };
 		9C09E10C2975ABD900216DD8 /* FloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButton.swift; sourceTree = "<group>"; };
 		9C09E10E2975AE8B00216DD8 /* FoodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
+		9C09E1102975B77F00216DD8 /* CameraButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraButton.swift; sourceTree = "<group>"; };
+		9C09E1122975BA7900216DD8 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
+		9C09E1142975BFA000216DD8 /* Calorix-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Calorix-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,9 +68,12 @@
 		9C09E0F42975A6BE00216DD8 /* Calorix App */ = {
 			isa = PBXGroup;
 			children = (
+				9C09E1142975BFA000216DD8 /* Calorix-App-Info.plist */,
 				9C09E0F52975A6BE00216DD8 /* Calorix_AppApp.swift */,
 				9C09E0F72975A6BE00216DD8 /* FoodListView.swift */,
 				9C09E10C2975ABD900216DD8 /* FloatingButton.swift */,
+				9C09E1102975B77F00216DD8 /* CameraButton.swift */,
+				9C09E1122975BA7900216DD8 /* ImagePickerView.swift */,
 				9C09E10E2975AE8B00216DD8 /* FoodCell.swift */,
 				9C09E10A2975A89B00216DD8 /* FoodDetailsView.swift */,
 				9C09E1082975A86200216DD8 /* FoodHolder.swift */,
@@ -156,8 +164,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C09E1092975A86200216DD8 /* FoodHolder.swift in Sources */,
+				9C09E1112975B77F00216DD8 /* CameraButton.swift in Sources */,
 				9C09E10F2975AE8B00216DD8 /* FoodCell.swift in Sources */,
 				9C09E10B2975A89B00216DD8 /* FoodDetailsView.swift in Sources */,
+				9C09E1132975BA7900216DD8 /* ImagePickerView.swift in Sources */,
 				9C09E10D2975ABD900216DD8 /* FloatingButton.swift in Sources */,
 				9C09E0FF2975A6BF00216DD8 /* Persistence.swift in Sources */,
 				9C09E0F82975A6BE00216DD8 /* FoodListView.swift in Sources */,
@@ -294,6 +304,8 @@
 				DEVELOPMENT_TEAM = JFL74Z4LCW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Calorix-App-Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need you camera!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -323,6 +335,8 @@
 				DEVELOPMENT_TEAM = JFL74Z4LCW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Calorix-App-Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need you camera!";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
