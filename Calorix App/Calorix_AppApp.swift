@@ -13,8 +13,11 @@ struct Calorix_AppApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            let context = persistenceController.container.viewContext
+            let foodHolder = FoodHolder(context)
+            FoodListView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(foodHolder)
         }
     }
 }
