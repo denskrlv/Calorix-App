@@ -59,20 +59,27 @@ struct FoodDetailsView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 
-    func saveItem() {
+    private func saveItem() {
         withAnimation {
             if selectedFoodItem == nil {
                 selectedFoodItem = Item(context: viewContext)
             }
             selectedFoodItem?.name = name
             selectedFoodItem?.weight = weight
-            selectedFoodItem?.calories = calories
+            selectedFoodItem?.calories = calculateCalories(name: name, weight: weight)
             selectedFoodItem?.dayTime = dayTime
             selectedFoodItem?.timestamp = timestamp
 
             foodHolder.saveContext(viewContext)
             self.presentationMode.wrappedValue.dismiss()
         }
+    }
+    
+    private func calculateCalories(name: String?, weight: String?) -> String? {
+        guard let name = name, let weight = Double(weight ?? "0") else {
+            return nil
+        }
+        return String(Database.getCaloriesPerG(key: name) * weight)
     }
 }
 

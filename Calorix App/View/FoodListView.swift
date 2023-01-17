@@ -16,17 +16,25 @@ struct FoodListView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Item>
+    
+    private var totalCalories: Double = 2000
+    private var consumedCalories: Double = 0
 
     var body: some View {
+        var percent = consumedCalories / totalCalories
         NavigationView {
             VStack {
+                ProgressBar(percent: percent)
+                    .onAppear {
+                        percent = consumedCalories / totalCalories
+                    }
                 ZStack {
                     List {
                         ForEach(items) { item in
                             NavigationLink(destination: FoodDetailsView(passedFoodItem: item)
                                 .environmentObject(foodHolder)) {
-                                FoodCell(passedFoodItem: item)
-                                    .environmentObject(foodHolder)
+                                    FoodCell(passedFoodItem: item)
+                                        .environmentObject(foodHolder)
                             }
                         }
                         .onDelete(perform: deleteItems)
@@ -40,6 +48,7 @@ struct FoodListView: View {
                     .frame(maxWidth: .infinity, alignment: .bottom)
                 }
             }
+            .background(.regularMaterial)
         }
     }
 
