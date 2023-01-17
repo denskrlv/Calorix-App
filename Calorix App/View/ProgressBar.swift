@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ProgressBar: View {
     
-    @State var percent: CGFloat
+    @State var consumedCalories: CGFloat
+    var totalCalories: CGFloat = 2000
     var width: CGFloat = UIScreen.main.bounds.size.width * 0.92
     var height: CGFloat = 20
     var color1 = Color(.systemOrange)
@@ -17,6 +18,7 @@ struct ProgressBar: View {
     
     var body: some View {
         let multiplier = width / 100
+        let percent = getPercentage()
         ZStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: height, style: .continuous)
                 .frame(width: width, height: height)
@@ -28,22 +30,21 @@ struct ProgressBar: View {
                     .clipShape(RoundedRectangle(cornerRadius: height, style: .continuous)))
                 .foregroundColor(.clear)
         }
-        .onAppear {
-            fixPercentage()
-        }
     }
     
-    private func fixPercentage() {
+    private func getPercentage() -> CGFloat {
+        var percent = consumedCalories / totalCalories
         if percent < 0 {
             percent = 0
-        } else if percent > 100 {
-            percent = 100
+        } else if percent > 1 {
+            percent = 1
         }
+        return percent * 100
     }
 }
 
 struct ProgressBar_Previews: PreviewProvider {
     static var previews: some View {
-        ProgressBar(percent: 50)
+        ProgressBar(consumedCalories: 0)
     }
 }

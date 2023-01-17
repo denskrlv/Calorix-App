@@ -16,17 +16,14 @@ struct FoodListView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Item>
-    
-    private var totalCalories: Double = 2000
-    private var consumedCalories: Double = 0
 
     var body: some View {
-        var percent = consumedCalories / totalCalories
+        var consumedCalories: CGFloat = getConsumedCalories()
         NavigationView {
             VStack {
-                ProgressBar(percent: percent)
+                ProgressBar(consumedCalories: consumedCalories)
                     .onAppear {
-                        percent = consumedCalories / totalCalories
+                        consumedCalories = getConsumedCalories()
                     }
                 ZStack {
                     List {
@@ -35,6 +32,7 @@ struct FoodListView: View {
                                 .environmentObject(foodHolder)) {
                                     FoodCell(passedFoodItem: item)
                                         .environmentObject(foodHolder)
+                                    
                             }
                         }
                         .onDelete(perform: deleteItems)
@@ -50,6 +48,17 @@ struct FoodListView: View {
             }
             .background(.regularMaterial)
         }
+    }
+    
+    private func getConsumedCalories() -> CGFloat {
+        var consumedCalories: CGFloat = 0
+        for item in items {
+            guard let caloriesDouble = Double(item.calories ?? "0") else {
+                return 0
+            }
+            consumedCalories += caloriesDouble
+        }
+        return consumedCalories
     }
 
     private func deleteItems(offsets: IndexSet) {
