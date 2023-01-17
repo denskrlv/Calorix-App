@@ -16,8 +16,8 @@ struct FoodListView: View {
     @State var progress: CGFloat = 0
 
     @SectionedFetchRequest<String?, Item>(
-        sectionIdentifier: \.dayTime,
-        sortDescriptors: [SortDescriptor(\.dayTime, order: .forward)]
+        sectionIdentifier: \.groupNumber,
+        sortDescriptors: [SortDescriptor(\.groupNumber, order: .forward)]
     )
     private var sectionedItems: SectionedFetchResults<String?, Item>
     
@@ -31,7 +31,7 @@ struct FoodListView: View {
                 ZStack {
                     List {
                         ForEach(sectionedItems) { section in
-                            Section(header: Text(section.id ?? "")) {
+                            Section(header: Text(decodeDayTime(groupNumber:section.id ?? ""))) {
                                 ForEach(section) { item in
                                     NavigationLink(destination: FoodDetailsView(passedFoodItem: item)
                                         .environmentObject(foodHolder)) {
@@ -81,6 +81,19 @@ struct FoodListView: View {
         }
         try? viewContext.save()
         updateCalories()
+    }
+    
+    func decodeDayTime(groupNumber: String) -> String {
+        if groupNumber == "A" {
+            return "Breakfast"
+        } else if groupNumber == "B" {
+            return "Lunch"
+        } else if groupNumber == "C" {
+            return "Snack"
+        } else if groupNumber == "D" {
+            return "Dinner"
+        }
+        return ""
     }
 }
 

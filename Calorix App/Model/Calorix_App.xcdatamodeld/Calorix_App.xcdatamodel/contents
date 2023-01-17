@@ -3,6 +3,7 @@
     <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
         <attribute name="calories" optional="YES" attributeType="String"/>
         <attribute name="dayTime" optional="YES" attributeType="String"/>
+        <attribute name="groupNumber" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="weight" optional="YES" attributeType="String"/>

@@ -19,6 +19,7 @@ struct FoodDetailsView: View {
     @State var calories: String
     @State var dayTime: String
     @State var timestamp: Date
+    @State var groupNumber: String
 
     init(passedFoodItem: Item?) {
         if let foodItem = passedFoodItem {
@@ -28,12 +29,14 @@ struct FoodDetailsView: View {
             _calories = State(initialValue: foodItem.calories ?? "")
             _dayTime = State(initialValue: foodItem.dayTime ?? "Breakfast")
             _timestamp = State(initialValue: foodItem.timestamp ?? Date())
+            _groupNumber = State(initialValue: foodItem.groupNumber ?? "A")
         } else {
             _name = State(initialValue: "")
             _weight = State(initialValue: "")
             _calories = State(initialValue: "")
             _dayTime = State(initialValue: "Breakfast")
             _timestamp = State(initialValue: Date())
+            _groupNumber = State(initialValue: "A")
         }
     }
 
@@ -69,6 +72,7 @@ struct FoodDetailsView: View {
             selectedFoodItem?.calories = calculateCalories(name: name, weight: weight)
             selectedFoodItem?.dayTime = dayTime
             selectedFoodItem?.timestamp = timestamp
+            selectedFoodItem?.groupNumber = encodeDayTime()
 
             foodHolder.saveContext(viewContext)
             self.presentationMode.wrappedValue.dismiss()
@@ -80,6 +84,19 @@ struct FoodDetailsView: View {
             return nil
         }
         return String(Database.getCaloriesPerG(key: name) * weight)
+    }
+    
+    private func encodeDayTime() -> String? {
+        if selectedFoodItem?.dayTime == "Breakfast" {
+            return "A"
+        } else if selectedFoodItem?.dayTime == "Lunch" {
+            return "B"
+        } else if selectedFoodItem?.dayTime == "Snack" {
+            return "C"
+        } else if selectedFoodItem?.dayTime == "Dinner" {
+            return "D"
+        }
+        return ""
     }
 }
 
