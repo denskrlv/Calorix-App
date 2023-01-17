@@ -11,19 +11,20 @@ import CoreData
 struct FoodListView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var foodHolder: FoodHolder
+    
+    @State var progress: CGFloat = 0
 
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Item>
-
+    
     var body: some View {
-        var consumedCalories: CGFloat = getConsumedCalories()
         NavigationView {
             VStack {
-                ProgressBar(consumedCalories: consumedCalories)
+                ProgressBar(consumedCalories: $progress)
                     .onAppear {
-                        consumedCalories = getConsumedCalories()
+                        getConsumedCalories()
                     }
                 ZStack {
                     List {
@@ -32,7 +33,6 @@ struct FoodListView: View {
                                 .environmentObject(foodHolder)) {
                                     FoodCell(passedFoodItem: item)
                                         .environmentObject(foodHolder)
-                                    
                             }
                         }
                         .onDelete(perform: deleteItems)
@@ -50,21 +50,22 @@ struct FoodListView: View {
         }
     }
     
-    private func getConsumedCalories() -> CGFloat {
-        var consumedCalories: CGFloat = 0
+    private func getConsumedCalories() {
+        progress = 0
         for item in items {
             guard let caloriesDouble = Double(item.calories ?? "0") else {
-                return 0
+                progress = 0
+                break
             }
-            consumedCalories += caloriesDouble
+            progress += caloriesDouble
         }
-        return consumedCalories
     }
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             offsets.map { items[$0] }.forEach(viewContext.delete)
             foodHolder.saveContext(viewContext)
+            getConsumedCalories()
         }
     }
 }
