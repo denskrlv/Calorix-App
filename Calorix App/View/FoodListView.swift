@@ -9,33 +9,41 @@ import SwiftUI
 import CoreData
 
 struct FoodListView: View {
+    
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var foodHolder: FoodHolder
     
     @State var progress: CGFloat = 0
 
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
+    @SectionedFetchRequest<String?, Item>(
+        sectionIdentifier: \.dayTime,
+        sortDescriptors: [SortDescriptor(\.dayTime, order: .forward)]
+    )
+    private var sectionedItems: SectionedFetchResults<String?, Item>
     
     var body: some View {
         NavigationView {
             VStack {
                 ProgressBar(consumedCalories: $progress)
                     .onAppear {
-                        getConsumedCalories()
+                        updateCalories()
                     }
                 ZStack {
                     List {
-                        ForEach(items) { item in
-                            NavigationLink(destination: FoodDetailsView(passedFoodItem: item)
-                                .environmentObject(foodHolder)) {
-                                    FoodCell(passedFoodItem: item)
-                                        .environmentObject(foodHolder)
+                        ForEach(sectionedItems) { section in
+                            Section(header: Text(section.id ?? "")) {
+                                ForEach(section) { item in
+                                    NavigationLink(destination: FoodDetailsView(passedFoodItem: item)
+                                        .environmentObject(foodHolder)) {
+                                            FoodCell(passedFoodItem: item)
+                                                .environmentObject(foodHolder)
+                                        }
+                                }
+                                .onDelete { indexSet in
+                                    deleteItem(section: Array(section), offsets: indexSet)
+                                }
                             }
                         }
-                        .onDelete(perform: deleteItems)
                     }
                     .navigationTitle("Food")
                     HStack {
@@ -47,26 +55,32 @@ struct FoodListView: View {
                 }
             }
             .background(.regularMaterial)
+            .onAppear {
+                print(sectionedItems)
+            }
         }
     }
     
-    private func getConsumedCalories() {
+    private func updateCalories() {
         progress = 0
-        for item in items {
-            guard let caloriesDouble = Double(item.calories ?? "0") else {
-                progress = 0
-                break
+        for section in sectionedItems {
+            for item in section {
+                guard let caloriesDouble = Double(item.calories ?? "0") else {
+                    progress = 0
+                    break
+                }
+                progress += caloriesDouble
             }
-            progress += caloriesDouble
         }
     }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-            foodHolder.saveContext(viewContext)
-            getConsumedCalories()
+    
+    func deleteItem(section: [Item], offsets: IndexSet) {
+        for index in offsets {
+            let item = section[index]
+            viewContext.delete(item)
         }
+        try? viewContext.save()
+        updateCalories()
     }
 }
 

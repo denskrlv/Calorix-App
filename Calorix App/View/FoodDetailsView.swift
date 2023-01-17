@@ -26,13 +26,13 @@ struct FoodDetailsView: View {
             _name = State(initialValue: foodItem.name ?? "")
             _weight = State(initialValue: foodItem.weight ?? "")
             _calories = State(initialValue: foodItem.calories ?? "")
-            _dayTime = State(initialValue: foodItem.dayTime ?? "")
+            _dayTime = State(initialValue: foodItem.dayTime ?? "Breakfast")
             _timestamp = State(initialValue: foodItem.timestamp ?? Date())
         } else {
             _name = State(initialValue: "")
             _weight = State(initialValue: "")
             _calories = State(initialValue: "")
-            _dayTime = State(initialValue: "")
+            _dayTime = State(initialValue: "Breakfast")
             _timestamp = State(initialValue: Date())
         }
     }
@@ -41,7 +41,7 @@ struct FoodDetailsView: View {
         Form {
             Section {
                 TextField("Name", text: $name)
-                TextField("Weight", text: $weight)
+                TextField("Grams", text: $weight)
                     .keyboardType(.numberPad)
                 Picker("Type", selection: $dayTime) {
                     ForEach(["Breakfast", "Lunch", "Snack", "Dinner"], id: \.self) { cardType in
