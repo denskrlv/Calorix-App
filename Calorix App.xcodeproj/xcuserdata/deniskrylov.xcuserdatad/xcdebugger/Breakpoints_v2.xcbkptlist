@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "B5BA0878-5650-4015-B2A7-F4170114DB1E"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EA291649-5C58-4D49-99F9-E25E330FDED1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Calorix App/View/ImagePickerView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "ImagePickerView"
+            landmarkType = "14">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "68D3E785-CF93-46BA-8BF5-AD6FA146161C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Calorix App/View/ImagePickerView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "makeUIViewController(context:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "524EFBBF-E069-448B-A298-A7D1C0F27B7D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Calorix App/View/FoodListView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "524EFBBF-E069-448B-A298-A7D1C0F27B7D - 413a84947ae4050a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (SwiftUI.SectionedFetchResults&lt;Swift.Optional&lt;Swift.String&gt;, Calorix_App.Item&gt;.Section) -&gt; SwiftUI.Section&lt;SwiftUI.Text, &lt;&lt;opaque return type of SwiftUI.DynamicViewContent.onDelete(perform: Swift.Optional&lt;(Foundation.IndexSet) -&gt; ()&gt;) -&gt; some&gt;&gt;.0, SwiftUI.EmptyView&gt; in closure #1 () -&gt; SwiftUI.ForEach&lt;SwiftUI.SectionedFetchResults&lt;Swift.Optional&lt;Swift.String&gt;, Calorix_App.Item&gt;, Swift.Optional&lt;Swift.String&gt;, SwiftUI.Section&lt;SwiftUI.Text, &lt;&lt;opaque return type of SwiftUI.DynamicViewContent.onDelete(perform: Swift.Optional&lt;(Foundation.IndexSet) -&gt; ()&gt;) -&gt; some&gt;&gt;.0, SwiftUI.EmptyView&gt;&gt; in closure #2 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.navigationTitle(SwiftUI.LocalizedStringKey) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.frame(minWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, minHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.onAppear(perform: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; some&gt;&gt;.0, SwiftUI.ZStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.navigationTitle(SwiftUI.LocalizedStringKey) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.frame(minWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, minHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0)&gt;&gt;)&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.background&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ShapeStyle&gt;(_: &#x3c4;_1_0, ignoresSafeAreaEdges: SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0 in Calorix_App.FoodListView.body.getter : some"
+                  moduleName = "Calorix App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/deniskrylov/Developer/Calorix%20App/Calorix%20App/View/FoodListView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38"
+                  offsetFromSymbolStart = "388">
+               </Location>
+               <Location
+                  uuid = "524EFBBF-E069-448B-A298-A7D1C0F27B7D - 49e233a846cb607d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.DynamicViewContent.onDelete(perform: Swift.Optional&lt;(Foundation.IndexSet) -&gt; ()&gt;) -&gt; some&gt;&gt;.0 in closure #1 (SwiftUI.SectionedFetchResults&lt;Swift.Optional&lt;Swift.String&gt;, Calorix_App.Item&gt;.Section) -&gt; SwiftUI.Section&lt;SwiftUI.Text, &lt;&lt;opaque return type of SwiftUI.DynamicViewContent.onDelete(perform: Swift.Optional&lt;(Foundation.IndexSet) -&gt; ()&gt;) -&gt; some&gt;&gt;.0, SwiftUI.EmptyView&gt; in closure #1 () -&gt; SwiftUI.ForEach&lt;SwiftUI.SectionedFetchResults&lt;Swift.Optional&lt;Swift.String&gt;, Calorix_App.Item&gt;, Swift.Optional&lt;Swift.String&gt;, SwiftUI.Section&lt;SwiftUI.Text, &lt;&lt;opaque return type of SwiftUI.DynamicViewContent.onDelete(perform: Swift.Optional&lt;(Foundation.IndexSet) -&gt; ()&gt;) -&gt; some&gt;&gt;.0, SwiftUI.EmptyView&gt;&gt; in closure #2 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.navigationTitle(SwiftUI.LocalizedStringKey) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.frame(minWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, minHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.onAppear(perform: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; some&gt;&gt;.0, SwiftUI.ZStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.navigationTitle(SwiftUI.LocalizedStringKey) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.frame(minWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, minHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0)&gt;&gt;)&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.background&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ShapeStyle&gt;(_: &#x3c4;_1_0, ignoresSafeAreaEdges: SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0 in Calorix_App.FoodListView.body.getter : some"
+                  moduleName = "Calorix App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/deniskrylov/Developer/Calorix%20App/Calorix%20App/View/FoodListView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "39"
+                  endingLineNumber = "39"
+                  offsetFromSymbolStart = "408">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
