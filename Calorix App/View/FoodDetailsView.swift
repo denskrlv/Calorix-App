@@ -53,6 +53,7 @@ struct FoodDetailsView: View {
             }
             
             Section {
+                DatePicker("Date", selection: $timestamp, in: ...Date.now, displayedComponents: .date)
                 Picker("Type", selection: $dayTime) {
                     ForEach(["Breakfast", "Lunch", "Snack", "Dinner"], id: \.self) { cardType in
                         Text(String(cardType)).tag(String(cardType))
