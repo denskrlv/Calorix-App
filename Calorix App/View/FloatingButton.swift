@@ -18,15 +18,18 @@ struct FloatingButton: View {
             HStack {
                 NavigationLink(destination: FoodDetailsView(passedFoodItem: nil)
                     .environmentObject(foodHolder)) {
-                    Image(systemName: "plus")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(maxWidth: 20, maxHeight: 20)
+                        ZStack {
+                            Circle()
+                                .foregroundColor(Color(UIColor.systemGreen))
+                                .frame(width: 70, height: 70)
+                            Image(systemName: "plus")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(maxWidth: 30, maxHeight: 30)
+                                .foregroundColor(.white)
+                        }
                 }
-                .padding(20)
                 .foregroundColor(.white)
-                .background(Color(UIColor.systemGreen))
-                .cornerRadius(60)
                 .padding(30)
                 .shadow(color: .black.opacity(0.3), radius: 3, x: 3, y: 3)
             }

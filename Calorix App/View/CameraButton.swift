@@ -21,18 +21,21 @@ struct CameraButton: View {
                 Button {
                     cameraPresented.toggle()
                 } label: {
-                    Image(systemName: "camera")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxWidth: 25, maxHeight: 25)
+                    ZStack {
+                        Circle()
+                            .foregroundColor(Color(UIColor.systemBlue))
+                            .frame(width: 70, height: 70)
+                        Image(systemName: "camera")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxWidth: 30, maxHeight: 30)
+                            .foregroundColor(.white)
+                    }
                 }
                 .fullScreenCover(isPresented: $cameraPresented, content: {
                     ImagePickerView(selectedImage: $selectedImage, sourceType: .camera)
                 })
-                .padding(20)
                 .foregroundColor(.white)
-                .background(Color(UIColor.systemBlue))
-                .cornerRadius(60)
                 .padding(30)
                 .shadow(color: .black.opacity(0.3), radius: 3, x: 3, y: 3)
             }
