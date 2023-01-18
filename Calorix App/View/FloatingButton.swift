@@ -19,11 +19,14 @@ struct FloatingButton: View {
                 NavigationLink(destination: FoodDetailsView(passedFoodItem: nil)
                     .environmentObject(foodHolder)) {
                     Image(systemName: "plus")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxWidth: 20, maxHeight: 20)
                 }
-                .padding(15)
+                .padding(20)
                 .foregroundColor(.white)
                 .background(Color(UIColor.systemGreen))
-                .cornerRadius(30)
+                .cornerRadius(60)
                 .padding(30)
                 .shadow(color: .black.opacity(0.3), radius: 3, x: 3, y: 3)
             }

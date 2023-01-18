@@ -20,6 +20,7 @@ struct FoodDetailsView: View {
     @State var dayTime: String
     @State var timestamp: Date
     @State var groupNumber: String
+    @State var quantity: Int = 1
 
     init(passedFoodItem: Item?) {
         if let foodItem = passedFoodItem {
@@ -30,6 +31,7 @@ struct FoodDetailsView: View {
             _dayTime = State(initialValue: foodItem.dayTime ?? "Breakfast")
             _timestamp = State(initialValue: foodItem.timestamp ?? Date())
             _groupNumber = State(initialValue: foodItem.groupNumber ?? "A")
+            _quantity = State(initialValue: Int(truncating: foodItem.quantity ?? NSDecimalNumber(value: 1)))
         } else {
             _name = State(initialValue: "")
             _weight = State(initialValue: "")
@@ -37,6 +39,7 @@ struct FoodDetailsView: View {
             _dayTime = State(initialValue: "Breakfast")
             _timestamp = State(initialValue: Date())
             _groupNumber = State(initialValue: "A")
+            _quantity = State(initialValue: Int(truncating: NSDecimalNumber(value: 1)))
         }
     }
 
@@ -46,6 +49,10 @@ struct FoodDetailsView: View {
                 TextField("Name", text: $name)
                 TextField("Grams", text: $weight)
                     .keyboardType(.numberPad)
+                Stepper("Quantity: \(quantity)", value: $quantity, in: 1...10,  step: 1)
+            }
+            
+            Section {
                 Picker("Type", selection: $dayTime) {
                     ForEach(["Breakfast", "Lunch", "Snack", "Dinner"], id: \.self) { cardType in
                         Text(String(cardType)).tag(String(cardType))
@@ -68,22 +75,30 @@ struct FoodDetailsView: View {
                 selectedFoodItem = Item(context: viewContext)
             }
             selectedFoodItem?.name = name
-            selectedFoodItem?.weight = weight
+            selectedFoodItem?.weight = calculateWeight(weight: weight)
             selectedFoodItem?.calories = calculateCalories(name: name, weight: weight)
             selectedFoodItem?.dayTime = dayTime
             selectedFoodItem?.timestamp = timestamp
             selectedFoodItem?.groupNumber = encodeDayTime()
-
+            selectedFoodItem?.quantity = NSDecimalNumber(value: quantity)
+            
             foodHolder.saveContext(viewContext)
             self.presentationMode.wrappedValue.dismiss()
         }
+    }
+    
+    private func calculateWeight(weight: String?) -> String? {
+        guard let weight = Double(weight ?? "0") else {
+            return nil
+        }
+        return String(weight * Double(quantity))
     }
     
     private func calculateCalories(name: String?, weight: String?) -> String? {
         guard let name = name, let weight = Double(weight ?? "0") else {
             return nil
         }
-        return String(Database.getCaloriesPerG(key: name) * weight)
+        return String(Int(Database.getCaloriesPerG(key: name) * weight * Double(quantity)))
     }
     
     private func encodeDayTime() -> String? {

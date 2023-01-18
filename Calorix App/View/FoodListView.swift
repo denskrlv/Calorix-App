@@ -14,6 +14,7 @@ struct FoodListView: View {
     @EnvironmentObject var foodHolder: FoodHolder
     
     @State var progress: CGFloat = 0
+    @State var presentFoodDetails: Bool = false
 
     @SectionedFetchRequest<String?, Item>(
         sectionIdentifier: \.groupNumber,
@@ -36,7 +37,6 @@ struct FoodListView: View {
                                     NavigationLink(destination: FoodDetailsView(passedFoodItem: item)
                                         .environmentObject(foodHolder)) {
                                             FoodCell(passedFoodItem: item)
-                                                .environmentObject(foodHolder)
                                         }
                                 }
                                 .onDelete { indexSet in
@@ -45,7 +45,8 @@ struct FoodListView: View {
                             }
                         }
                     }
-                    .navigationTitle("Food")
+                    .navigationTitle("\(Date(), formatter: dateFormatter)")
+                    .navigationBarTitleDisplayMode(.inline)
                     HStack {
                         CameraButton()
                         Spacer()
@@ -54,9 +55,21 @@ struct FoodListView: View {
                     .frame(maxWidth: .infinity, alignment: .bottom)
                 }
             }
-            .background(.regularMaterial)
-            .onAppear {
-                print(sectionedItems)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "arrow.left")
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "arrow.right")
+                    }
+                }
             }
         }
     }
@@ -97,10 +110,10 @@ struct FoodListView: View {
     }
 }
 
-private let itemFormatter: DateFormatter = {
+private let dateFormatter: DateFormatter = {
     let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
+    formatter.dateStyle = .medium
+    formatter.timeStyle = .none
     return formatter
 }()
 

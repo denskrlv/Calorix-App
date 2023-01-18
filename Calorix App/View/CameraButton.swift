@@ -22,14 +22,17 @@ struct CameraButton: View {
                     cameraPresented.toggle()
                 } label: {
                     Image(systemName: "camera")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: 25, maxHeight: 25)
                 }
                 .fullScreenCover(isPresented: $cameraPresented, content: {
                     ImagePickerView(selectedImage: $selectedImage, sourceType: .camera)
                 })
-                .padding(15)
+                .padding(20)
                 .foregroundColor(.white)
                 .background(Color(UIColor.systemBlue))
-                .cornerRadius(30)
+                .cornerRadius(60)
                 .padding(30)
                 .shadow(color: .black.opacity(0.3), radius: 3, x: 3, y: 3)
             }
