@@ -22,14 +22,21 @@ struct CameraButton: View {
                     cameraPresented.toggle()
                 } label: {
                     ZStack {
-                        Circle()
+                        Rectangle()
                             .foregroundColor(Color(UIColor.systemBlue))
-                            .frame(width: 70, height: 70)
-                        Image(systemName: "camera")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(maxWidth: 30, maxHeight: 30)
-                            .foregroundColor(.white)
+                            .frame(width: 160, height: 60)
+                            .cornerRadius(60)
+                        HStack {
+                            Image(systemName: "camera.viewfinder")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(maxWidth: 30, maxHeight: 30)
+                                .foregroundColor(.white)
+                            Spacer()
+                                .frame(maxWidth: 16)
+                            Text("AI Scan")
+                                .font(.system(size: 20, weight: .medium))
+                        }
                     }
                 }
                 .fullScreenCover(isPresented: $cameraPresented, content: {

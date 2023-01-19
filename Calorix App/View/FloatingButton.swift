@@ -21,7 +21,7 @@ struct FloatingButton: View {
                         ZStack {
                             Circle()
                                 .foregroundColor(Color(UIColor.systemGreen))
-                                .frame(width: 70, height: 70)
+                                .frame(width: 60, height: 60)
                             Image(systemName: "plus")
                                 .resizable()
                                 .scaledToFit()
