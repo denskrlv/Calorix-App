@@ -24,7 +24,7 @@ struct CameraButton: View {
                     ZStack {
                         Rectangle()
                             .foregroundColor(Color(UIColor.systemBlue))
-                            .frame(width: 160, height: 60)
+                            .frame(width: 180, height: 60)
                             .cornerRadius(60)
                         HStack {
                             Image(systemName: "camera.viewfinder")
@@ -34,7 +34,7 @@ struct CameraButton: View {
                                 .foregroundColor(.white)
                             Spacer()
                                 .frame(maxWidth: 16)
-                            Text("AI Scan")
+                            Text("Food Scan")
                                 .font(.system(size: 20, weight: .medium))
                         }
                     }

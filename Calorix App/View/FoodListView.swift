@@ -14,11 +14,15 @@ struct FoodListView: View {
     @EnvironmentObject var foodHolder: FoodHolder
     
     @State var progress: CGFloat = 0
-    @State var presentFoodDetails: Bool = false
+    @State var pickedDate: Date = Date()
+    
+    @State var foodDetailsViewPresented: Bool = false
+    @State var userViewPresented: Bool = false
 
     @SectionedFetchRequest<String?, Item>(
         sectionIdentifier: \.groupNumber,
-        sortDescriptors: [SortDescriptor(\.groupNumber, order: .forward)]
+        sortDescriptors: [SortDescriptor(\.groupNumber, order: .forward), SortDescriptor(\.timestamp, order: .forward)]
+//        predicate: NSPredicate(format: "timestamp >= @% AND timestamp < @%", calendar.startOfDay(for: Date()) as NSDate)
     )
     private var sectionedItems: SectionedFetchResults<String?, Item>
     
@@ -26,15 +30,12 @@ struct FoodListView: View {
         NavigationView {
             VStack {
                 ProgressBar(consumedCalories: $progress)
-                    .onAppear {
-                        updateCalories()
-                    }
                 ZStack {
                     List {
                         ForEach(sectionedItems) { section in
                             Section(header: Text(decodeDayTime(groupNumber:section.id ?? ""))) {
                                 ForEach(section) { item in
-                                    NavigationLink(destination: FoodDetailsView(passedFoodItem: item)
+                                    NavigationLink(destination: FoodDetailsView(passedFoodItem: item, hideNavigationBar: true)
                                         .environmentObject(foodHolder)) {
                                             FoodCell(passedFoodItem: item)
                                         }
@@ -45,29 +46,34 @@ struct FoodListView: View {
                             }
                         }
                     }
-                    .navigationTitle("\(Date(), formatter: dateFormatter)")
-                    .navigationBarTitleDisplayMode(.inline)
                     HStack {
                         CameraButton()
                         Spacer()
-                        FloatingButton()
+                        FloatingButton(onDismiss: {
+                            updateCalories()
+                        })
                     }
                     .frame(maxWidth: .infinity, alignment: .bottom)
                 }
             }
+            .navigationBarTitleDisplayMode(.inline)
+            .onAppear {
+                updateCalories()
+            }
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        
-                    } label: {
-                        Image(systemName: "arrow.left")
-                    }
+                ToolbarItem(placement: .principal) {
+                    DatePicker("label", selection: $pickedDate, displayedComponents: [.date])
+                        .datePickerStyle(CompactDatePickerStyle())
+                        .labelsHidden()
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        
+                        userViewPresented.toggle()
                     } label: {
-                        Image(systemName: "arrow.right")
+                        Image(systemName: "person.crop.circle")
+                    }
+                    .sheet(isPresented: $userViewPresented) {
+                        
                     }
                 }
             }

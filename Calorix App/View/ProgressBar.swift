@@ -39,6 +39,7 @@ struct ProgressBar: View {
             }
             .padding(EdgeInsets(top: 4, leading: 16, bottom: 4, trailing: 16))
         }
+        .padding(.top, 16)
     }
     
     private func getPercentage() -> CGFloat {

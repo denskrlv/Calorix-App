@@ -18,7 +18,7 @@ struct FoodCell: View {
                 Text(passedFoodItem.name ?? "")
                     .font(.system(size: 18, weight: .bold))
                     .frame(maxWidth: .infinity, alignment: .leading)
-                Text("\(passedFoodItem.weight ?? "") gram")
+                Text("\(passedFoodItem.totalWeight ?? "") gram")
                     .font(.system(size: 14))
                     .frame(maxWidth: .infinity, alignment: .leading)
             }

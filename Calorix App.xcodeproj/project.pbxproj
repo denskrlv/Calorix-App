@@ -19,6 +19,7 @@
 		9C09E10F2975AE8B00216DD8 /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C09E10E2975AE8B00216DD8 /* FoodCell.swift */; };
 		9C09E1112975B77F00216DD8 /* CameraButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C09E1102975B77F00216DD8 /* CameraButton.swift */; };
 		9C09E1132975BA7900216DD8 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C09E1122975BA7900216DD8 /* ImagePickerView.swift */; };
+		9C276447297B26B700D07687 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C276446297B26B700D07687 /* CalendarView.swift */; };
 		9C8091972976201200DD0FC0 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8091962976201200DD0FC0 /* ProgressBar.swift */; };
 		9C80919B29762BC700DD0FC0 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C80919A29762BC700DD0FC0 /* Database.swift */; };
 		9CE760B52976DCB100788B38 /* AIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE760B42976DCB100788B38 /* AIViewController.swift */; };
@@ -40,6 +41,7 @@
 		9C09E1102975B77F00216DD8 /* CameraButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraButton.swift; sourceTree = "<group>"; };
 		9C09E1122975BA7900216DD8 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		9C09E1142975BFA000216DD8 /* Calorix-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Calorix-App-Info.plist"; sourceTree = SOURCE_ROOT; };
+		9C276446297B26B700D07687 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		9C8091962976201200DD0FC0 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		9C80919A29762BC700DD0FC0 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		9CE760B42976DCB100788B38 /* AIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				9C09E10E2975AE8B00216DD8 /* FoodCell.swift */,
 				9C09E10A2975A89B00216DD8 /* FoodDetailsView.swift */,
 				9C09E1082975A86200216DD8 /* FoodHolder.swift */,
+				9C276446297B26B700D07687 /* CalendarView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 				9C09E1112975B77F00216DD8 /* CameraButton.swift in Sources */,
 				9C09E10F2975AE8B00216DD8 /* FoodCell.swift in Sources */,
 				9C09E10B2975A89B00216DD8 /* FoodDetailsView.swift in Sources */,
+				9C276447297B26B700D07687 /* CalendarView.swift in Sources */,
 				9C09E1132975BA7900216DD8 /* ImagePickerView.swift in Sources */,
 				9C80919B29762BC700DD0FC0 /* Database.swift in Sources */,
 				9C09E10D2975ABD900216DD8 /* FloatingButton.swift in Sources */,
