@@ -23,6 +23,7 @@ struct FoodDetailsView: View {
     @State var timestamp: Date
     @State var groupNumber: String
     @State var quantity: Int = 1
+    @State var eatingMood: String
 
     init(passedFoodItem: Item?, hideNavigationBar: Bool) {
         _hideNavigationBar = State(initialValue: hideNavigationBar)
@@ -36,6 +37,7 @@ struct FoodDetailsView: View {
             _timestamp = State(initialValue: foodItem.timestamp ?? Date())
             _groupNumber = State(initialValue: foodItem.groupNumber ?? "A")
             _quantity = State(initialValue: Int(truncating: foodItem.quantity ?? NSDecimalNumber(value: 1)))
+            _eatingMood = State(initialValue: foodItem.eatingMood ?? "Yes")
         } else {
             _name = State(initialValue: "")
             _weight = State(initialValue: "")
@@ -45,6 +47,7 @@ struct FoodDetailsView: View {
             _timestamp = State(initialValue: Date())
             _groupNumber = State(initialValue: "A")
             _quantity = State(initialValue: Int(truncating: NSDecimalNumber(value: 1)))
+            _eatingMood = State(initialValue: "Yes")
         }
     }
 
@@ -62,6 +65,14 @@ struct FoodDetailsView: View {
                     DatePicker("Date", selection: $timestamp, in: ...Date.now, displayedComponents: .date)
                     Picker("Type", selection: $dayTime) {
                         ForEach(["Breakfast", "Lunch", "Snack", "Dinner"], id: \.self) { cardType in
+                            Text(String(cardType)).tag(String(cardType))
+                        }
+                    }
+                }
+                
+                Section("Eating mood") {
+                    Picker("Where you hungry?", selection: $eatingMood) {
+                        ForEach(["Yes", "No"], id: \.self) { cardType in
                             Text(String(cardType)).tag(String(cardType))
                         }
                     }
@@ -102,8 +113,9 @@ struct FoodDetailsView: View {
             selectedFoodItem?.calories = calculateCalories(name: name, weight: weight)
             selectedFoodItem?.dayTime = dayTime
             selectedFoodItem?.timestamp = timestamp
-            selectedFoodItem?.groupNumber = encodeDayTime()
+            selectedFoodItem?.groupNumber = selectedFoodItem?.encodeDayTime()
             selectedFoodItem?.quantity = NSDecimalNumber(value: quantity)
+            selectedFoodItem?.eatingMood = eatingMood
             
             foodHolder.saveContext(viewContext)
             self.presentationMode.wrappedValue.dismiss()
@@ -122,19 +134,6 @@ struct FoodDetailsView: View {
             return nil
         }
         return String(Int(Database.getCaloriesPerG(key: name) * weight * Double(quantity)))
-    }
-    
-    private func encodeDayTime() -> String? {
-        if selectedFoodItem?.dayTime == "Breakfast" {
-            return "A"
-        } else if selectedFoodItem?.dayTime == "Lunch" {
-            return "B"
-        } else if selectedFoodItem?.dayTime == "Snack" {
-            return "C"
-        } else if selectedFoodItem?.dayTime == "Dinner" {
-            return "D"
-        }
-        return ""
     }
 }
 

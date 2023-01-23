@@ -17,7 +17,6 @@ struct FoodListView: View {
     @State var pickedDate: Date = Date()
     
     @State var foodDetailsViewPresented: Bool = false
-    @State var userViewPresented: Bool = false
 
     @SectionedFetchRequest<String?, Item>(
         sectionIdentifier: \.groupNumber,
@@ -61,19 +60,31 @@ struct FoodListView: View {
                 updateCalories()
             }
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        withAnimation {
+                            foodHolder.moveDate(days: -1, viewContext)
+                        }
+                    } label: {
+                        Image(systemName: "arrow.left")
+                    }
+                }
                 ToolbarItem(placement: .principal) {
-                    DatePicker("label", selection: $pickedDate, displayedComponents: [.date])
-                        .datePickerStyle(CompactDatePickerStyle())
-                        .labelsHidden()
+//                    DatePicker("label", selection: $pickedDate, displayedComponents: [.date])
+//                        .datePickerStyle(CompactDatePickerStyle())
+//                        .labelsHidden()
+                    Button {
+                        
+                    } label: {
+                        Text(foodHolder.date.formatted(date: .abbreviated, time: .omitted))
+                    }
+
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        userViewPresented.toggle()
+                        foodHolder.moveDate(days: 1, viewContext)
                     } label: {
-                        Image(systemName: "person.crop.circle")
-                    }
-                    .sheet(isPresented: $userViewPresented) {
-                        
+                        Image(systemName: "arrow.right")
                     }
                 }
             }

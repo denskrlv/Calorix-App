@@ -22,6 +22,13 @@ struct FoodCell: View {
                     .font(.system(size: 14))
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
+            
+            if passedFoodItem.eatingMood == "No" {
+                Spacer()
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .foregroundColor(Color(UIColor.systemRed))
+            }
+            
             Spacer()
             Text("\(passedFoodItem.calories ?? "0") KCAL")
                 .font(.system(size: 14, weight: .semibold))
