@@ -18,12 +18,12 @@ struct FoodListView: View {
     
     @State var foodDetailsViewPresented: Bool = false
 
-    @SectionedFetchRequest<String?, Item>(
-        sectionIdentifier: \.groupNumber,
-        sortDescriptors: [SortDescriptor(\.groupNumber, order: .forward), SortDescriptor(\.timestamp, order: .forward)]
-//        predicate: NSPredicate(format: "timestamp >= @% AND timestamp < @%", calendar.startOfDay(for: Date()) as NSDate)
-    )
-    private var sectionedItems: SectionedFetchResults<String?, Item>
+//    @SectionedFetchRequest<String?, Item>(
+//        sectionIdentifier: \.groupNumber,
+//        sortDescriptors: [SortDescriptor(\.groupNumber, order: .forward), SortDescriptor(\.timestamp, order: .forward)]
+////        predicate: NSPredicate(format: "timestamp >= @% AND timestamp < @%", calendar.startOfDay(for: Date()) as NSDate)
+//    )
+//    private var sectionedItems: SectionedFetchResults<String?, Item>
     
     var body: some View {
         NavigationView {
@@ -31,17 +31,23 @@ struct FoodListView: View {
                 ProgressBar(consumedCalories: $progress)
                 ZStack {
                     List {
-                        ForEach(sectionedItems) { section in
-                            Section(header: Text(decodeDayTime(groupNumber:section.id ?? ""))) {
-                                ForEach(section) { item in
-                                    NavigationLink(destination: FoodDetailsView(passedFoodItem: item, hideNavigationBar: true)
-                                        .environmentObject(foodHolder)) {
-                                            FoodCell(passedFoodItem: item)
-                                        }
-                                }
-                                .onDelete { indexSet in
-                                    deleteItem(section: Array(section), offsets: indexSet)
-                                }
+//                        ForEach(sectionedItems) { section in
+//                            Section(header: Text(decodeDayTime(groupNumber:section.id ?? ""))) {
+//                                ForEach(section) { item in
+//                                    NavigationLink(destination: FoodDetailsView(passedFoodItem: item, hideNavigationBar: true)
+//                                        .environmentObject(foodHolder)) {
+//                                            FoodCell(passedFoodItem: item)
+//                                        }
+//                                }
+//                                .onDelete { indexSet in
+//                                    deleteItem(section: Array(section), offsets: indexSet)
+//                                }
+//                            }
+//                        }
+                        ForEach(foodHolder.foodItem) { item in
+                            NavigationLink(destination: FoodDetailsView(passedFoodItem: item, hideNavigationBar: true)
+                                .environmentObject(foodHolder)) {
+                                    FoodCell(passedFoodItem: item)
                             }
                         }
                     }
@@ -49,7 +55,7 @@ struct FoodListView: View {
                         CameraButton()
                         Spacer()
                         FloatingButton(onDismiss: {
-                            updateCalories()
+//                            updateCalories()
                         })
                     }
                     .frame(maxWidth: .infinity, alignment: .bottom)
@@ -57,7 +63,7 @@ struct FoodListView: View {
             }
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
-                updateCalories()
+//                updateCalories()
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -91,18 +97,18 @@ struct FoodListView: View {
         }
     }
     
-    private func updateCalories() {
-        progress = 0
-        for section in sectionedItems {
-            for item in section {
-                guard let caloriesDouble = Double(item.calories ?? "0") else {
-                    progress = 0
-                    break
-                }
-                progress += caloriesDouble
-            }
-        }
-    }
+//    private func updateCalories() {
+//        progress = 0
+//        for section in sectionedItems {
+//            for item in section {
+//                guard let caloriesDouble = Double(item.calories ?? "0") else {
+//                    progress = 0
+//                    break
+//                }
+//                progress += caloriesDouble
+//            }
+//        }
+//    }
     
     func deleteItem(section: [Item], offsets: IndexSet) {
         for index in offsets {
@@ -110,7 +116,7 @@ struct FoodListView: View {
             viewContext.delete(item)
         }
         try? viewContext.save()
-        updateCalories()
+//        updateCalories()
     }
     
     func decodeDayTime(groupNumber: String) -> String {
