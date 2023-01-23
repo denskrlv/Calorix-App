@@ -17,13 +17,7 @@ struct FoodListView: View {
     @State var pickedDate: Date = Date()
     
     @State var foodDetailsViewPresented: Bool = false
-
-//    @SectionedFetchRequest<String?, Item>(
-//        sectionIdentifier: \.groupNumber,
-//        sortDescriptors: [SortDescriptor(\.groupNumber, order: .forward), SortDescriptor(\.timestamp, order: .forward)]
-////        predicate: NSPredicate(format: "timestamp >= @% AND timestamp < @%", calendar.startOfDay(for: Date()) as NSDate)
-//    )
-//    private var sectionedItems: SectionedFetchResults<String?, Item>
+    let calendar = Calendar(identifier: .gregorian)
     
     var body: some View {
         NavigationView {
@@ -31,31 +25,22 @@ struct FoodListView: View {
                 ProgressBar(consumedCalories: $progress)
                 ZStack {
                     List {
-//                        ForEach(sectionedItems) { section in
-//                            Section(header: Text(decodeDayTime(groupNumber:section.id ?? ""))) {
-//                                ForEach(section) { item in
-//                                    NavigationLink(destination: FoodDetailsView(passedFoodItem: item, hideNavigationBar: true)
-//                                        .environmentObject(foodHolder)) {
-//                                            FoodCell(passedFoodItem: item)
-//                                        }
-//                                }
-//                                .onDelete { indexSet in
-//                                    deleteItem(section: Array(section), offsets: indexSet)
-//                                }
-//                            }
-//                        }
-                        ForEach(foodHolder.foodItem) { item in
-                            NavigationLink(destination: FoodDetailsView(passedFoodItem: item, hideNavigationBar: true)
-                                .environmentObject(foodHolder)) {
-                                    FoodCell(passedFoodItem: item)
+                        ForEach(foodHolder.keys, id: \.self) { key in
+                            Section(header: Text(decodeDayTime(groupNumber: key))) {
+                                ForEach(foodHolder.groupedFoodItems[key]!) { item in
+                                    NavigationLink(destination: FoodDetailsView(passedFoodItem: item, hideNavigationBar: true, timestamp: pickedDate)
+                                        .environmentObject(foodHolder)) {
+                                            FoodCell(passedFoodItem: item)
+                                        }
+                                }
                             }
                         }
                     }
                     HStack {
                         CameraButton()
                         Spacer()
-                        FloatingButton(onDismiss: {
-//                            updateCalories()
+                        FloatingButton(pickedDate: $pickedDate, onDismiss: {
+                            updateCalories()
                         })
                     }
                     .frame(maxWidth: .infinity, alignment: .bottom)
@@ -63,32 +48,33 @@ struct FoodListView: View {
             }
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
-//                updateCalories()
+                updateCalories()
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
                         withAnimation {
                             foodHolder.moveDate(days: -1, viewContext)
+                            pickedDate = calendar.date(byAdding: .day, value: -1, to: pickedDate) ?? Date()
+                            updateCalories()
                         }
                     } label: {
                         Image(systemName: "arrow.left")
                     }
                 }
                 ToolbarItem(placement: .principal) {
-//                    DatePicker("label", selection: $pickedDate, displayedComponents: [.date])
-//                        .datePickerStyle(CompactDatePickerStyle())
-//                        .labelsHidden()
-                    Button {
-                        
-                    } label: {
-                        Text(foodHolder.date.formatted(date: .abbreviated, time: .omitted))
-                    }
-
+                    DatePicker("", selection: $pickedDate, in: ...Date.now, displayedComponents: [.date])
+                        .datePickerStyle(CompactDatePickerStyle())
+                        .labelsHidden()
+                        .onChange(of: pickedDate, perform: { value in
+                            foodHolder.updateDate(newDate: value, viewContext)
+                        })
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         foodHolder.moveDate(days: 1, viewContext)
+                        pickedDate = calendar.date(byAdding: .day, value: 1, to: pickedDate) ?? Date()
+                        updateCalories()
                     } label: {
                         Image(systemName: "arrow.right")
                     }
@@ -97,29 +83,29 @@ struct FoodListView: View {
         }
     }
     
-//    private func updateCalories() {
-//        progress = 0
-//        for section in sectionedItems {
-//            for item in section {
-//                guard let caloriesDouble = Double(item.calories ?? "0") else {
-//                    progress = 0
-//                    break
-//                }
-//                progress += caloriesDouble
-//            }
-//        }
-//    }
+    private func updateCalories() {
+        progress = 0
+        for foodKey in foodHolder.groupedFoodItems.keys {
+            for item in foodHolder.groupedFoodItems[foodKey]! {
+                guard let caloriesDouble = Double(item.calories ?? "0") else {
+                    progress = 0
+                    break
+                }
+                progress += caloriesDouble
+            }
+        }
+    }
     
-    func deleteItem(section: [Item], offsets: IndexSet) {
+    private func deleteItem(section: [Item], offsets: IndexSet) {
         for index in offsets {
             let item = section[index]
             viewContext.delete(item)
         }
         try? viewContext.save()
-//        updateCalories()
+        updateCalories()
     }
     
-    func decodeDayTime(groupNumber: String) -> String {
+    private func decodeDayTime(groupNumber: String) -> String {
         if groupNumber == "A" {
             return "Breakfast"
         } else if groupNumber == "B" {
@@ -131,6 +117,7 @@ struct FoodListView: View {
         }
         return ""
     }
+    
 }
 
 private let dateFormatter: DateFormatter = {

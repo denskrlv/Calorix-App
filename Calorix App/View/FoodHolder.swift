@@ -12,11 +12,18 @@ class FoodHolder: ObservableObject {
     
     @Published var date = Date()
     @Published var foodItem: [Item] = []
+    @Published var groupedFoodItems: [String?: [Item]] = [:]
+    @Published var keys: [String] = []
     
     let calendar: Calendar = Calendar.current
     
     func moveDate(days: Int, _ context: NSManagedObjectContext) {
         date = calendar.date(byAdding: .day, value: days, to: date)!
+        refreshFoodItems(context)
+    }
+    
+    func updateDate(newDate: Date, _ context: NSManagedObjectContext) {
+        date = newDate
         refreshFoodItems(context)
     }
     
@@ -26,6 +33,8 @@ class FoodHolder: ObservableObject {
     
     func refreshFoodItems(_ context: NSManagedObjectContext) {
         foodItem = fetchFoodItems(context)
+        groupedFoodItems = groupFetch(foodItem)
+        keys = Array(groupedFoodItems.keys.map { $0! }).sorted()
     }
     
     func fetchFoodItems(_ context: NSManagedObjectContext) -> [Item] {
@@ -52,6 +61,10 @@ class FoodHolder: ObservableObject {
         let start = calendar.startOfDay(for: date)
         let end = calendar.date(byAdding: .day, value: 1, to: start)
         return NSPredicate(format: "timestamp >= %@ AND timestamp < %@", start as NSDate, end! as NSDate)
+    }
+    
+    private func groupFetch(_ result : [Item]) -> [String?: [Item]] {
+        return Dictionary(grouping: result, by: { $0.groupNumber })
     }
     
     func saveContext(_ context: NSManagedObjectContext) {

@@ -14,6 +14,8 @@ struct FoodDetailsView: View {
     @EnvironmentObject var foodHolder: FoodHolder
 
     @State var hideNavigationBar: Bool
+    @State var alertIsPresented: Bool = false
+    
     @State var selectedFoodItem: Item?
     @State var name: String
     @State var weight: String
@@ -25,7 +27,7 @@ struct FoodDetailsView: View {
     @State var quantity: Int = 1
     @State var eatingMood: String
 
-    init(passedFoodItem: Item?, hideNavigationBar: Bool) {
+    init(passedFoodItem: Item?, hideNavigationBar: Bool, timestamp: Date) {
         _hideNavigationBar = State(initialValue: hideNavigationBar)
         if let foodItem = passedFoodItem {
             _selectedFoodItem = State(initialValue: foodItem)
@@ -34,7 +36,7 @@ struct FoodDetailsView: View {
             _totalWeight = State(initialValue: foodItem.totalWeight ?? "")
             _calories = State(initialValue: foodItem.calories ?? "")
             _dayTime = State(initialValue: foodItem.dayTime ?? "Breakfast")
-            _timestamp = State(initialValue: foodItem.timestamp ?? Date())
+            _timestamp = State(initialValue: foodItem.timestamp ?? timestamp)
             _groupNumber = State(initialValue: foodItem.groupNumber ?? "A")
             _quantity = State(initialValue: Int(truncating: foodItem.quantity ?? NSDecimalNumber(value: 1)))
             _eatingMood = State(initialValue: foodItem.eatingMood ?? "Yes")
@@ -44,7 +46,7 @@ struct FoodDetailsView: View {
             _totalWeight = State(initialValue: "")
             _calories = State(initialValue: "")
             _dayTime = State(initialValue: "Breakfast")
-            _timestamp = State(initialValue: Date())
+            _timestamp = State(initialValue: timestamp)
             _groupNumber = State(initialValue: "A")
             _quantity = State(initialValue: Int(truncating: NSDecimalNumber(value: 1)))
             _eatingMood = State(initialValue: "Yes")
@@ -62,7 +64,7 @@ struct FoodDetailsView: View {
                 }
                 
                 Section("Day when consumed") {
-                    DatePicker("Date", selection: $timestamp, in: ...Date.now, displayedComponents: .date)
+                    DatePicker("Date", selection: $timestamp, in: ...Date.now)
                     Picker("Type", selection: $dayTime) {
                         ForEach(["Breakfast", "Lunch", "Snack", "Dinner"], id: \.self) { cardType in
                             Text(String(cardType)).tag(String(cardType))
@@ -83,6 +85,24 @@ struct FoodDetailsView: View {
                         .frame(maxWidth: .infinity, alignment: .center)
                         .foregroundColor(Color(UIColor.systemGreen))
                         .font(.system(size: 18, weight: .medium))
+                }
+                
+                if hideNavigationBar {
+                    Section {
+                        Button {
+                            alertIsPresented.toggle()
+                        } label: {
+                            Text("Delete")
+                        }
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .foregroundColor(Color(UIColor.systemRed))
+                        .font(.system(size: 18, weight: .medium))
+                        .alert(isPresented: $alertIsPresented) {
+                            Alert(title: Text("Delete"), message: Text("Are you sure you want to delete this meal?"), primaryButton: .destructive(Text("Delete")) {
+                                deleteItem()
+                            }, secondaryButton: .cancel())
+                        }
+                    }
                 }
             }
             .navigationTitle("Add Food")
@@ -117,9 +137,19 @@ struct FoodDetailsView: View {
             selectedFoodItem?.quantity = NSDecimalNumber(value: quantity)
             selectedFoodItem?.eatingMood = eatingMood
             
-            foodHolder.saveContext(viewContext)
+            if selectedFoodItem?.name != "" {
+                foodHolder.saveContext(viewContext)
+            }
             self.presentationMode.wrappedValue.dismiss()
         }
+    }
+    
+    private func deleteItem() {
+        if selectedFoodItem != nil {
+            viewContext.delete(selectedFoodItem!)
+        }
+        foodHolder.saveContext(viewContext)
+        self.presentationMode.wrappedValue.dismiss()
     }
     
     private func calculateWeight(weight: String?) -> String? {
@@ -139,7 +169,7 @@ struct FoodDetailsView: View {
 
 struct FoodDetails_Previews: PreviewProvider {
     static var previews: some View {
-        FoodDetailsView(passedFoodItem: Item(), hideNavigationBar: true)
+        FoodDetailsView(passedFoodItem: Item(), hideNavigationBar: true, timestamp: Date())
     }
 }
 
