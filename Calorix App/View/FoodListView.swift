@@ -38,6 +38,19 @@ struct FoodListView: View {
                             }
                         }
                     }
+                    .overlay {
+                        if foodHolder.groupedFoodItems.isEmpty {
+                            VStack {
+                                Image("empty_holder")
+                                    .resizable()
+                                    .scaledToFit()
+                                Text("You didn't log any food!")
+                                    .font(.system(size: 24, weight: .bold))
+                                    .foregroundColor(Color(UIColor.systemGreen))
+                            }
+                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 150, trailing: 0))
+                        }
+                    }
                     HStack {
                         CameraButton(food: food, onDismiss: {
                             updateCalories()
@@ -72,13 +85,16 @@ struct FoodListView: View {
                         .labelsHidden()
                         .onChange(of: pickedDate, perform: { value in
                             foodHolder.updateDate(newDate: value, viewContext)
+                            updateCalories()
                         })
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        foodHolder.moveDate(days: 1, viewContext)
-                        pickedDate = calendar.date(byAdding: .day, value: 1, to: pickedDate) ?? Date()
-                        updateCalories()
+                        if !calendar.isDateInToday(pickedDate) {
+                            foodHolder.moveDate(days: 1, viewContext)
+                            pickedDate = calendar.date(byAdding: .day, value: 1, to: pickedDate) ?? Date()
+                            updateCalories()
+                        }
                     } label: {
                         Image(systemName: "arrow.right")
                     }
