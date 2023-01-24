@@ -33,11 +33,19 @@ struct FoodListView: View {
                                             FoodCell(passedFoodItem: item)
                                         }
                                 }
+                                ForEach(foodHolder.groupedFoodItems[key]!) { item in
+                                    NavigationLink(destination: CameraView(passedFoodItem: item, timestamp: pickedDate)
+                                        .environmentObject(foodHolder)) {
+                                            FoodCell(passedFoodItem: item)
+                                        }
+                                }
                             }
                         }
                     }
                     HStack {
-                        CameraButton()
+                        CameraButton(pickedDate: $pickedDate, onDismiss: {
+                            updateCalories()
+                        }).environmentObject(foodHolder)
                         Spacer()
                         FloatingButton(pickedDate: $pickedDate, onDismiss: {
                             updateCalories()

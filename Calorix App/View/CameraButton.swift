@@ -10,12 +10,11 @@ import SwiftUI
 struct CameraButton: View {
     
     @EnvironmentObject var foodHolder: FoodHolder
-    
     @State var cameraPresented: Bool = false
-    @State var selectedImage: UIImage?
+    @Binding var pickedDate: Date
     
     var onDismiss: () -> ()
-    
+     
     var body: some View {
         VStack {
             Spacer()
@@ -42,9 +41,10 @@ struct CameraButton: View {
                     }
                 }
                 .sheet(isPresented: $cameraPresented, onDismiss: {
-                        onDismiss()
+                    onDismiss()
                 }, content: {
-                    
+                    CameraView(passedFoodItem: nil, timestamp: pickedDate)
+                        .environmentObject(foodHolder)
                 })
                 .foregroundColor(.white)
                 .padding(30)
@@ -54,8 +54,4 @@ struct CameraButton: View {
     }
 }
 
-//struct CameraButton_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CameraButton()
-//    }
-//}
+

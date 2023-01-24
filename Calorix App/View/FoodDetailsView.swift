@@ -115,7 +115,6 @@ struct FoodDetailsView: View {
                     } label: {
                         Text("Cancel")
                     }
-
                 }
             }
             .foregroundColor(Color(UIColor.label))
@@ -167,9 +166,9 @@ struct FoodDetailsView: View {
     }
 }
 
-struct FoodDetails_Previews: PreviewProvider {
-    static var previews: some View {
-        FoodDetailsView(passedFoodItem: Item(), hideNavigationBar: true, timestamp: Date())
-    }
-}
+//struct FoodDetails_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FoodDetailsView(passedFoodItem: Item(), hideNavigationBar: true, timestamp: Date())
+//    }
+//}
 
