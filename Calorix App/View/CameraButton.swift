@@ -14,6 +14,8 @@ struct CameraButton: View {
     @State var cameraPresented: Bool = false
     @State var selectedImage: UIImage?
     
+    var onDismiss: () -> ()
+    
     var body: some View {
         VStack {
             Spacer()
@@ -39,8 +41,10 @@ struct CameraButton: View {
                         }
                     }
                 }
-                .fullScreenCover(isPresented: $cameraPresented, content: {
-                    ImagePickerView(selectedImage: $selectedImage, sourceType: .camera)
+                .sheet(isPresented: $cameraPresented, onDismiss: {
+                        onDismiss()
+                }, content: {
+                    
                 })
                 .foregroundColor(.white)
                 .padding(30)
@@ -50,8 +54,8 @@ struct CameraButton: View {
     }
 }
 
-struct CameraButton_Previews: PreviewProvider {
-    static var previews: some View {
-        CameraButton()
-    }
-}
+//struct CameraButton_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CameraButton()
+//    }
+//}
