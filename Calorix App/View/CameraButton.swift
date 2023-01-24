@@ -11,7 +11,8 @@ struct CameraButton: View {
     
     @EnvironmentObject var foodHolder: FoodHolder
     @State var cameraPresented: Bool = false
-    @Binding var pickedDate: Date
+
+    @State var food: String
     
     var onDismiss: () -> ()
      
@@ -43,7 +44,7 @@ struct CameraButton: View {
                 .sheet(isPresented: $cameraPresented, onDismiss: {
                     onDismiss()
                 }, content: {
-                    CameraView(passedFoodItem: nil, timestamp: pickedDate)
+                    CameraView(food: $food)
                         .environmentObject(foodHolder)
                 })
                 .foregroundColor(.white)
@@ -51,6 +52,9 @@ struct CameraButton: View {
                 .shadow(color: .black.opacity(0.3), radius: 3, x: 3, y: 3)
             }
         }
+    }
+    private func printt(){
+        print(self.food)
     }
 }
 

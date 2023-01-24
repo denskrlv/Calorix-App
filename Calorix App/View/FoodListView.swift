@@ -16,6 +16,8 @@ struct FoodListView: View {
     @State var progress: CGFloat = 0
     @State var pickedDate: Date = Date()
     
+    @State var food = " none"
+    
     @State var foodDetailsViewPresented: Bool = false
     let calendar = Calendar(identifier: .gregorian)
     
@@ -33,17 +35,11 @@ struct FoodListView: View {
                                             FoodCell(passedFoodItem: item)
                                         }
                                 }
-                                ForEach(foodHolder.groupedFoodItems[key]!) { item in
-                                    NavigationLink(destination: CameraView(passedFoodItem: item, timestamp: pickedDate)
-                                        .environmentObject(foodHolder)) {
-                                            FoodCell(passedFoodItem: item)
-                                        }
-                                }
                             }
                         }
                     }
                     HStack {
-                        CameraButton(pickedDate: $pickedDate, onDismiss: {
+                        CameraButton(food: food, onDismiss: {
                             updateCalories()
                         }).environmentObject(foodHolder)
                         Spacer()
@@ -135,8 +131,8 @@ private let dateFormatter: DateFormatter = {
     return formatter
 }()
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        FoodListView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FoodListView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+//    }
+//}
