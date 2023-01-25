@@ -62,6 +62,11 @@ struct CameraButton: View {
     public func printt(prediction: String){
         self.food = prediction
         print(pickedDate)
+        if self.food == "Jackfruit" || self.food == "Pomegranate" || self.food == "Tennis Ball" || self.food == "Granny Smith"{
+            self.food = "Pear"
+        } else if self.food == "Packet" || self.food == "Pinwheel"{
+            self.food = "Pasta"
+        }
         let weight = generateRandomWeight()
         let dayTime = getDayTime(timestamp: pickedDate)
         let foodItem  = Item(context: viewContext)
