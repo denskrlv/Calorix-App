@@ -15,6 +15,9 @@
 		30CE37D8298049A100144C8C /* NOTICE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 30CE37D5298049A100144C8C /* NOTICE.txt */; };
 		30CE37DA2980803100144C8C /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CE37D92980803100144C8C /* CameraView.swift */; };
 		30CE37DC298081BE00144C8C /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CE37DB298081BE00144C8C /* Coordinator.swift */; };
+		30F8CB22298153AC00E70A45 /* MobileNetV2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 30F8CB21298153AC00E70A45 /* MobileNetV2.mlmodel */; };
+		30F8CB242981553600E70A45 /* Resnet50.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 30F8CB232981553600E70A45 /* Resnet50.mlmodel */; };
+		30F8CB26298155C500E70A45 /* ObjectDetector.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 30F8CB25298155C500E70A45 /* ObjectDetector.mlmodel */; };
 		9C09E0F62975A6BE00216DD8 /* Calorix_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C09E0F52975A6BE00216DD8 /* Calorix_AppApp.swift */; };
 		9C09E0F82975A6BE00216DD8 /* FoodListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C09E0F72975A6BE00216DD8 /* FoodListView.swift */; };
 		9C09E0FA2975A6BF00216DD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C09E0F92975A6BF00216DD8 /* Assets.xcassets */; };
@@ -43,6 +46,9 @@
 		30CE37D5298049A100144C8C /* NOTICE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NOTICE.txt; sourceTree = "<group>"; };
 		30CE37D92980803100144C8C /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		30CE37DB298081BE00144C8C /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		30F8CB21298153AC00E70A45 /* MobileNetV2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNetV2.mlmodel; sourceTree = "<group>"; };
+		30F8CB232981553600E70A45 /* Resnet50.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Resnet50.mlmodel; sourceTree = "<group>"; };
+		30F8CB25298155C500E70A45 /* ObjectDetector.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ObjectDetector.mlmodel; sourceTree = "<group>"; };
 		9C09E0F22975A6BE00216DD8 /* Calorix App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Calorix App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C09E0F52975A6BE00216DD8 /* Calorix_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calorix_AppApp.swift; sourceTree = "<group>"; };
 		9C09E0F72975A6BE00216DD8 /* FoodListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListView.swift; sourceTree = "<group>"; };
@@ -135,6 +141,9 @@
 		9C80919829762B7D00DD0FC0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				30F8CB25298155C500E70A45 /* ObjectDetector.mlmodel */,
+				30F8CB232981553600E70A45 /* Resnet50.mlmodel */,
+				30F8CB21298153AC00E70A45 /* MobileNetV2.mlmodel */,
 				30CE37D3298049A100144C8C /* LICENSE.txt */,
 				30CE37D4298049A100144C8C /* MobileNet.mlmodel */,
 				30CE37D5298049A100144C8C /* NOTICE.txt */,
@@ -247,6 +256,7 @@
 				9C09E1092975A86200216DD8 /* FoodHolder.swift in Sources */,
 				9C8091972976201200DD0FC0 /* ProgressBar.swift in Sources */,
 				9C09E1112975B77F00216DD8 /* CameraButton.swift in Sources */,
+				30F8CB242981553600E70A45 /* Resnet50.mlmodel in Sources */,
 				30CE37DA2980803100144C8C /* CameraView.swift in Sources */,
 				30CE37D22980464A00144C8C /* VNClassificationObservation+confidenceString.swift in Sources */,
 				9C09E10F2975AE8B00216DD8 /* FoodCell.swift in Sources */,
@@ -258,12 +268,14 @@
 				9C09E0FF2975A6BF00216DD8 /* Persistence.swift in Sources */,
 				30CE37D7298049A100144C8C /* MobileNet.mlmodel in Sources */,
 				9C4F0E28297E0CDE0017D22E /* ItemExtension.swift in Sources */,
+				30F8CB26298155C500E70A45 /* ObjectDetector.mlmodel in Sources */,
 				30CE37CD2980462C00144C8C /* ImagePredictor.swift in Sources */,
 				9CE760B52976DCB100788B38 /* AIViewController.swift in Sources */,
 				9C09E0F82975A6BE00216DD8 /* FoodListView.swift in Sources */,
 				9C09E1022975A6BF00216DD8 /* Calorix_App.xcdatamodeld in Sources */,
 				9C09E0F62975A6BE00216DD8 /* Calorix_AppApp.swift in Sources */,
 				9CE760B72976DCF600788B38 /* VisionObjectRecognitionViewController.swift in Sources */,
+				30F8CB22298153AC00E70A45 /* MobileNetV2.mlmodel in Sources */,
 				30CE37DC298081BE00144C8C /* Coordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
