@@ -22,4 +22,8 @@ extension Item {
         return ""
     }
     
+    func generateRandomWeight() -> String {
+        return String(Int.random(in: 1...500))
+    }
+    
 }

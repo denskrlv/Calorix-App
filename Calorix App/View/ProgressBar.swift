@@ -10,8 +10,10 @@ import SwiftUI
 struct ProgressBar: View {
     
     @Binding var consumedCalories: CGFloat
+    @State var caloriesGoal: String = ""
+    @Binding var showAlert: Bool
+    @State var totalCalories: CGFloat = 2000
     
-    var totalCalories: CGFloat = 2000
     var width: CGFloat = UIScreen.main.bounds.size.width * 0.92
     var height: CGFloat = 20
     var color1 = Color(.systemOrange)
@@ -33,7 +35,24 @@ struct ProgressBar: View {
                     .foregroundColor(.clear)
             }
             HStack {
-                Text("Consumed: \(Int(consumedCalories))")
+                Text("Eaten: \(Int(consumedCalories))")
+                Spacer()
+                Button {
+                    showAlert.toggle()
+                } label: {
+                    Text("Change")
+                }.alert("Change Goal", isPresented: $showAlert, actions: {
+                    TextField("Calories", text: $caloriesGoal)
+                    Button("Submit", action: {
+                        totalCalories = CGFloat(Int(caloriesGoal) ?? 2000)
+                        if totalCalories <= 500 {
+                            totalCalories = 500
+                        }
+                    })
+                    Button("Cancel", role: .cancel, action: {})
+                }, message: {
+                    Text("Please enter your new calories goal (minimum is 500).")
+                })
                 Spacer()
                 Text("Goal: \(Int(totalCalories))")
             }

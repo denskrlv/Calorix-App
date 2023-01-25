@@ -19,12 +19,13 @@ struct FoodListView: View {
     @State var food = " none"
     
     @State var foodDetailsViewPresented: Bool = false
+    @State var showAlert: Bool = false
     let calendar = Calendar(identifier: .gregorian)
     
     var body: some View {
         NavigationView {
             VStack {
-                ProgressBar(consumedCalories: $progress)
+                ProgressBar(consumedCalories: $progress, showAlert: $showAlert)
                 ZStack {
                     List {
                         ForEach(foodHolder.keys, id: \.self) { key in
@@ -44,7 +45,7 @@ struct FoodListView: View {
                                 Image("empty_holder")
                                     .resizable()
                                     .scaledToFit()
-                                Text("You didn't log any food!")
+                                Text("You didn't log any foods yet!")
                                     .font(.system(size: 24, weight: .bold))
                                     .foregroundColor(Color(UIColor.systemGreen))
                             }
